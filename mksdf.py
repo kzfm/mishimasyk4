@@ -9,4 +9,6 @@ for act in assay.activities:
     if act.standard_relation == "=":
         print act.compound.molecule.structure.molfile
         print "\n>  <pIC50>\n{}\n".format(9 - log10(act.standard_value))
+        print "\n>  <ALogP>\n{}\n".format(act.compound.molecule.property.alogp)
+        print "\n>  <PSA>\n{}\n".format(act.compound.molecule.property.psa)
         print "$$$$"

@@ -13,6 +13,8 @@ suppl = Chem.SDMolSupplier('syk.sdf')
 
 fps = [AllChem.GetMorganFingerprintAsBitVect(mol, 2) for mol in suppl]
 acts = [float(mol.GetProp("pIC50")) for mol in suppl]
+alogps = [float(mol.GetProp("ALogP")) for mol in suppl]
+psas = [float(mol.GetProp("PSA")) for mol in suppl]
 
 smiles = [MolToSmiles(mol) for mol in suppl]
 
@@ -85,5 +87,9 @@ while remain:
 g = Graph(edges)
 g.vs["smiles"] = smiles
 g.vs["activities"] = acts
+g.vs["psa"] = psas
+g.vs["alogp"] = alogps
 g.es["similarity"] = sim_edges
 g.save("test.gml")
+
+print g.evcent()
